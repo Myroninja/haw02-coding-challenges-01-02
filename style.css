@@ -100,18 +100,18 @@ body {
     background-position: top; /* Anchors the background to the top of the container. */
     background-repeat: no-repeat; /* Prevents the background image from repeating. */
     display: block; /* Allows the nested items to be easily positioned to design. */
-    height: 96vh; /* The container will only cover 96% of the viewport height. Great for responsivness as it's relative and not absolute. */
+    min-height: 96vh; /* The container will only cover a minimum of 96% of the viewport height. Great for responsivness as it's relative and not absolute. */
     padding: 0px; /* Ensures the nested content is flush to the edges of the container. */
 }
 
-.main-content {
+.header-content {
     display: flex; /* Allows ease with positioning of contained elements. */
-    height: 96vh; /* Sets the height of this container to 96% of the viewport height. Good for responsiveness. */
+    min-height: 96vh; /* Sets the height of this container to a minimum of 96% of the viewport height. Good for responsiveness. */
     justify-content: center; /* Keeps the content in the center of the container, horizontally. */
     align-items: end; /* Sets the contained items to align with the bottom or 'end' of the container. */
 }
 
-.main-content div {
+.header-content div {
     display: flex; /* All divs within this parent container to have the flex display property. Helps with managing the behaviour of all nested items. */
 }
 
@@ -121,7 +121,7 @@ body {
 
 .hero-img {
     width: 100%; /* Keeps the size and therefore positioning responsive to different viewport sizes. */
-    height: 100%; /* As above. */
+    height: 88vh; /* As above. */
     display: block; /* To remove any default 'inline' baseline gaps (the display property of an img element is inline by default). */
     object-fit: contain; /* Maintain aspect ratio of the image whilst being as large as possible. */
     object-position: bottom; /* Sits the image at the bottom of the container in line with the design.. */
@@ -162,7 +162,7 @@ body {
 
     /* LSC */
     color: #ffffff; /* Bright contrasting text colour for easy reading. */
-    background-color: rgba(60, 60, 60, 0.8); /* A slightly transparent background colour to blend with the overall design. */
+    background-color: rgba(60, 60, 60, 0.9); /* A slightly transparent background colour to blend with the overall design. */
     border-radius: 5px; /* Rounded edges. */
     box-shadow: none; /* Required to allow the mouse hover inset box-shadow to transition in - without this, the effect appears with no easing. */
     transition: background-color 0.3s, box-shadow 0.15s, color 0.3s; /* Transitions for background colour, box-shadow, and text colour. Short timings for a snappy feel. */
@@ -196,9 +196,132 @@ body {
 }
 
 .read-more:hover {
-    color:#B21F24; /* Changes white text to red on hover. */
+    color:#b21f24; /* Changes white text to red on hover. */
     background-color: rgba(255, 255, 255, 0.8); /* Loses most of the transparency and gains brightness on hover - helps with reading the red text. */
     transform: scale(1.05); /* Scales the button up for a pop-out effect. */
+}
+
+.main-content {
+    padding: 0; /* Remove all padding. */
+    background-color:rgb(255, 255, 255); /* White background to allow the name header to 'bleed' into the next section. */
+}
+
+#main-01 {
+    display: flex; 
+    font-size: 4rem;
+    padding: 0 30px 10px 30px; /* Desired padding to achieve the inbetween feel of the #main-01 section. */
+    user-select: none; /* Prevents the user from highlighting the text or desk img - supports a more rooted and professional feel. */
+}
+
+.what-container {
+    margin-top: 20px; /* Spacing above the container for the text within. */
+    max-width: 50%; /* Ensures this container cannot be larger than half the width of #main-01. */
+}
+
+#main-01 h1 {
+    margin: 5% 2vw 5% 2vw; /* Helps with the desired position of the header text. */
+    display: inline-block; /* Allows more control over the size and positioning compared to display: block;. */
+    color:#B21F24; /* Deep red colour to tie in the red colours of the animated background & desk-img. */
+    font-size: calc(2rem + 6vw); /* Replaces the previous clamp formula as it was easier to scale the text to design. */
+}
+
+#main-01 p {
+    margin: 2vh 2vw; /* Helps with the desired position of the paragraph text. */
+    line-height: 1; /* Slightly reduced line height. */
+    font-size: calc(0.4rem + 3vw); /* Replaces the previous clamp formula as it was easier to scale the text to design. */
+    font-weight: 600; /* Increased font weight for easier reading. */
+}
+
+.desk-container {
+    margin-top: 20px; /* Slightly smaller than other 30px margins used elsewhere.
+                        Intention is to have the top edge visible when at the top of the page to indicate more content is below. In other words: SCROLL, USER!!! */
+    max-width: 50%; /* Ensures this container cannot be larger than half the width of #main-01. */
+}
+
+.desk-img {
+    max-width: 100%; /* The image cannot be wider than the full width of the parent container. */
+    min-height: 720px; /* The image must be at least 720px high (native resolution: 720px x 720px). */
+    object-fit: cover; /* Prevents the image from warping or stretching. The sacrifice is cropping, which is fine here. */
+    border-radius: 5px; /* Consistent rounded edge found in many places. */
+}
+
+.main-02 {
+    padding: 30px; /* Desired padding for the container edge. */
+    background-image: url('images/index/bg-animated-grey.gif'); /* The animated background image for the content area.
+                                                                A greyscale variant of the header background, rotated 45 degrees for scrolling */
+    background-size: cover; /* Ensures the background image covers the entire container. */
+    background-position: top; /* Anchors the background to the top of the container. */
+    background-repeat: no-repeat; /* Prevents the background image from repeating. */
+}
+
+.grid {
+    display: grid; /* A secondary class for .main-02 assigning grid properties. */
+    gap: 2rem; /* desired spacing between grid items. */
+    grid-template-columns: repeat(auto-fit, minmax(350px, 1fr)); /* A grid layout without the need for a media query. This is extremely responsive.
+                                                                Each grid item must be at least 350px wide, if it can't it will appear on the next grid row. */
+    position: relative; /* Helped me move text to the top of a container - paired with position:absolute; on the child element (<p> for #update-date). */
+}
+
+.task { /* Represents every entry to the grid. */
+    background-color: rgba(60, 60, 60, 0.9); /* Same background as .greeting-box for consistency and readability. */
+    padding: 2vh 2vw; /* Padding to contain the nested elements to design. */
+    box-shadow: inset 0px 0px 6px 2px #e1f9ff,
+                2px 2px 6px 2px #5f5f5f;
+                /* Glowing inside edge with a light shadow beneath. */
+    border-radius: 5px; /* Consistent rounded edge found in many places. */
+    text-align: center;
+    align-content: center; /* Keep both heading and paragraph elements centered, vertically. */
+    transition: background-color 0.15s, box-shadow 0.3s, color 0.15s, transform 0.2s ease; /* Transitions for background, box shadow, text colour, and the scale transform effect. */
+    color: #ffffff; /* Desired text colour. */
+}
+
+.task:hover {
+    background-color: #ffffff; /* A whte background on hover. */
+    box-shadow: inset 0px 0px 0 0 #ffffff,
+                0px 0px 6px 2px #ffffff;
+                /* Glowing edge whilst removing the inside glow. */
+    color: #000000; /* Invert text colour to white. */
+    transform: scale(1.03); /* Small upscale on hover. */
+}
+
+.task-upr h2 {
+    margin: 0; /* Remove default margins. */
+    font-size: calc(0.8rem + 1vh); /* Desired scaling for each task header. */
+    user-select: none; /* Prevents the user from highlighting the text - supports a more rooted and professional feel. */
+    font-weight: lighter; /* Helps with readability as 'Racing Sans One' is quite a heavy weighted font. */
+}
+
+.task-lwr p {
+    font-weight: 600; /* Increased font weight for better reading. */
+    margin: 0; /* Remove default margins. */
+    font-size: calc(0.6rem + 1vw); /* Desired scaling for each task description. */
+    user-select: none; /* Prevents the user from highlighting the text - supports a more rooted and professional feel. */
+}
+
+.task-done {
+    background-color: rgba(42, 62, 42, 0.9); /* A slightly transparent, green colour to signify completion. */
+    box-shadow: inset 0px 0px 6px 2px #73aa73,
+                0px 0px 6px 2px #a1eea1;
+                /* Reinforces the completed signalling. */
+    color: #364d36; /* Reinforces the completed signalling. */
+    text-decoration: line-through; /* Reinforces the completed signalling. */
+}
+
+.task-done:hover {
+    background-color: #adffad; /* Illusion of glowing or illuminating on hover. */
+    box-shadow: inset 0px 0px 0 0 #ffffff,
+                0px 0px 8px 4px #73aa73;
+                /* Reinforces the illuminated look. */
+}
+
+#update-date {
+    position: absolute; /* To fix the text to a consistent location within the page. Setting .grid's position: relative; helps achieve this. */
+    display: flex;
+    top: 0;
+    left: 0;
+    padding:  3px 0 0 15px; /* Positioning within the padding of .grid itself. */
+    margin: 0; /* Remove default margins. */
+    color: #ffffff; /* Desired text colour. */
 }
 
 /* --------------------------------------------------------- */
@@ -211,7 +334,7 @@ footer {
 }
 
 .footer-box {
-    height: 4vh; /* The container will only cover the remaining 4% of the viewport height. Great for responsivness as it's relative rather than absolute. */
+    min-height: 4vh; /* The container will only cover the remaining 4% of the viewport height. Great for responsivness as it's relative rather than absolute. */
     width: 100%; /* Fills the entire width of the container, the body. */
 }
 
@@ -259,7 +382,7 @@ footer {
 /* -------- Media Queries -------- */
 
 @media screen and (max-width: 425px) { /*Opted for 425px as this is roughly the width of a large phone screen (according to Chrome's inspect device toolbar).
-    Many responsive optimisations were implemented before introducing this breaking point. */
+                                        Many responsive optimisations were implemented before introducing this breaking point. */
     .top-bar {
         background-color: #ffffff; /* Gives the entire top bar a plain white background colour. */
         min-height: 8vh; /* A repsonsive height that isn't too restrictive (hence the minimal modifier); the top bar will be larger if it 'needs' to be. */
@@ -303,10 +426,11 @@ footer {
         left: auto; /* Resets the left: 60%; setting which offsets the container to the side. It now sits centrally again. */
         transition: none; /* Removes the tranition effects. */
         align-self: flex-end; /* Positions the container at the bottom of the parent, due to the parent flex direction being set to 'row' (by default). */
-        margin-bottom: 10vh; /* Combined with the flex-end alignment, this is the ideal location for the container by design. */
+        margin-bottom: 10%; /* Combined with the flex-end alignment, this is the ideal location for the container by design. */
+        padding: 2vh 4vw; /* Increased horizontal padding due to trialling on mobile; the text appeared misplaced. */
     }
 
-    .greeting-box:hover {
+    .greeting-box:hover { /* Undo's the hover effects as this wasn't felt necessary on mobile. */
         background-color: rgba(60, 60, 60, 0.8); /* Maintains the same background colour on mouse hover, negating the effect. */
         box-shadow: none; /* Same as above. */
         color: #ffffff; /* Same as above. */
@@ -326,6 +450,79 @@ footer {
 
     .read-more:hover {
         transform: none; /* Negates the transform effects. */
+    }
+
+    #main-01 {
+        position: relative; /* Supports the absolute positioning of child containers for 'merging'. */
+        min-height: 750px; /* Manually calculated so the container itself is as tall as the desk-img + 30px padding. */
+        user-select: auto; /* Resets ability to select/highlight. Less bothered about text being highlighted on mobile/smaller devices. */
+        padding: 0 0px 10px 0px; /* Remove padding to ensure nested elements sit central due to their own margins & padding. */
+    }
+
+    #main-01 h1 {
+        color: #6EF7FF; /* Good opportunity to use the bg's blue colour - reads better than the red. */
+    }
+
+    #main-01 p {
+        text-align: center; /* Desired alignment makes more sense from a narrower, more linear screen size. */
+        font-size: calc(0.2rem + 3vh);
+    }
+
+    .desk-container {
+        filter: grayscale(1) brightness(0.5); /* Styling to turn desk-img into more of a bg image. */
+        position: absolute; /* Forces desired positioning. */
+        max-width: 100%; /* Caps the container width to the full width of #main-01. */
+        z-index: 1; /* Lower value to ensure this sits below .what-container. */
+        padding: 0 30px 0 30px; /* Replaces the most of the padding for #main-01. */
+    }
+
+    .what-container {
+        position: absolute; /* Forces desired positioning. */
+        z-index: 1000; /* Higher value to ensure this sits above .desk-container. */
+        max-width: 100%; /* Caps the container width to the full width of #main-01. */
+        text-align: center; /* Center-aligns the heading text. */
+        padding: 0 30px 0 30px; /* Desired spacing from the edges of .desk-container. */
+    }
+
+    .what-container p {
+        color: #ffffff; /* White text for the darker desk-img background. */
+    }
+
+    .main-02 {
+        padding: 30px 10px 30px 10px; /* Reduced side-padding to allow a wider stretch of grid items. */
+    }
+
+    .grid {
+        grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); /* Each grid item must be at least 280px wide.
+                                                                    Adjusted as 350px was too large for smaller screens. */
+    }
+
+    .task {
+        transition: none; /* Negates the transition effects. */
+        text-decoration: none; /* Removes the strikethrough from completed tasks on narrow screens. */
+    }
+
+    .task:hover { /* Undo the hover effects as this wasn't felt necessary on mobile. */
+        background-color: rgba(60, 60, 60, 0.9);
+        box-shadow: inset 0px 0px 6px 2px #e1f9ff,
+                2px 2px 6px 2px #5f5f5f;
+        transform: none;
+        color: #ffffff;
+    }
+
+    .task-done {
+        color: #ffffff; /* White text for better reading. */
+    }
+
+    .task-done h2 {
+        text-decoration: line-through; /* Strikethrough for header as this is still easily read. */
+    }
+
+    .task-done:hover { /* Undo's the hover effects as this wasn't felt necessary on mobile. */
+        background-color: #2a3e2a;
+        box-shadow: inset 0px 0px 6px 2px #73aa73,
+                0px 0px 6px 2px #a1eea1;
+        color: #ffffff;
     }
 
     .footer-text {
